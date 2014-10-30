@@ -1,2 +1,5 @@
 /build/
 /gwt-unitCache/
+/WebContent/demogwt/
+/WebContent/WEB-INF/classes/
+/WebContent/WEB-INF/deploy/
