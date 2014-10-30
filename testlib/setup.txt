@@ -1,0 +1,26 @@
+Directions to use JPA2/JUnit4 testing with WebLogic 11g/12c and JBoss 7
+
+Setup Run Configuration for your JUnit Test
+
+Prerequisite: add Junit 4 library to build path
+
+Default is JPA setup is hibernate.
+1. For Hibernate or Eclipselink in JUnit. Run configurations -> Modify Classpath
+  a. Select UserEntries -> Press Add Jars... -> Then navigate to demo/testlib
+	 and add jars from the following folders: 
+     drivers and eclipselink or hibernate 
+     Note: you need to click Add Jars twice, once for drivers and once for JPA jars 
+
+2. (Eclipselink only) Put the following in Arguments -> VM Arguments: -javaagent:testlib/eclipselink/eclipselink-2.4.1.jar
+-Djpa.impl=eclipselink
+  a. (WebLogic only) Remove BootstapEntries -> WebLogic System Libraries
+
+3. If your workspaces isn't C:/workspace, add the following to VM Arguments:
+-Dalltests.sqlpath=<<your workspace path>>
+
+Hibernate setup
+--------------------
+Copied from JBoss 7.1 modules (org/hibernate and org/javaassist) to testlib/hibernate
+Update these as the server updates as appropriate.
+Hibernate uses testsrc/log4j.xml for logging
+

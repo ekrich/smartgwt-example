@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.6.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.6.1/distro-source/core/src/gwt-module.dtd">
+<module rename-to='demogwt'>
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.user.History"/>
+	
+	<!-- SmartGWT specific modules that are located in smartgwt.jar or smartgwt-skins.jar -->
+	<inherits name="com.smartgwtee.SmartGwtEENoScript"/>	
+    <inherits name="com.smartclient.theme.enterprise.EnterpriseResources"/>
+    
+    <!-- Need this for development ONLY. Enables Visual and DataSource builders -->
+    <inherits name="com.smartgwtee.tools.Tools"/>
+    
+    <!-- Source paths relative to module file (Demo.gwt.xml) -->
+	<source path="app" />
+	
+	<!-- The app starts here -->
+	<entry-point class="com.demo.gwt.app.App"></entry-point>
+	
+	<!-- Super Dev Mode support -->
+	<add-linker name="xsiframe" />
+</module>

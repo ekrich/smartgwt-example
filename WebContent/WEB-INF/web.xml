@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>demo</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>resteasy.media.type.mappings</param-name>
+		<param-value>html : text/html, json : application/json, xml : application/xml</param-value>
+	</context-param>
+	<env-entry>
+		<description>Set the application logging level to one of the 
+    following: SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST, ALL, OFF</description>
+		<env-entry-name>java.util.logging.level</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>INFO</env-entry-value>
+	</env-entry>
+</web-app>

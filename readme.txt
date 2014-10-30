@@ -1,0 +1,1 @@
+JPA metamodel setup or removal from User.class

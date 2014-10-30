@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<persistence 
+        xmlns="http://java.sun.com/xml/ns/persistence" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+		http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+		version="2.0">
+	<persistence-unit name="demo" transaction-type="JTA">
+		<!-- Commented out items are a good example for Oracle -->
+<!--         <jta-data-source>java:/jdbc/DemoDS</jta-data-source> -->
+		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+<!-- 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" /> -->
+<!-- 			<property name="hibernate.hbm2ddl.auto" value="validate" /> -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.max_fetch_depth" value="3" />
+			<property name="hibernate.show_sql" value="true" />           
+        </properties>
+    </persistence-unit>
+</persistence>
