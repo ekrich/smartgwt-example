@@ -9,6 +9,7 @@ package com.demo.rs;
  * @author ekr
  *
  * @param <T> - e.g. UserInfo type for User object
+ * TODO make extend InfoObject in the type parameter
  */
 public interface WebServiceInfo<T> {
 	

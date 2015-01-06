@@ -51,7 +51,8 @@ public class App extends HLayout implements EntryPoint {
         setHeight100();  
         setLayoutMargin(20);  
   
-        DataSource supplyCategoryDS = SupplyCategoryXmlDs.getInstance();  
+        //DataSource supplyCategoryDS = SupplyCategoryXmlDs.getInstance();
+        DataSource supplyCategoryDS = SupplyCategoryDs.getInstance();  
         DataSource supplyItemDS = ItemSupplyXmlDs.getInstance();  
   
         categoryTree = new CategoryTreeGrid(supplyCategoryDS);  
