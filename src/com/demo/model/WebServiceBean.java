@@ -6,10 +6,10 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import com.demo.entity.SupplyItem;
 import com.demo.entity.User;
 import com.demo.rs.CategoryInfo;
 import com.demo.rs.InfoUtils;
+import com.demo.rs.SupplyItemInfo;
 import com.demo.rs.UserInfo;
 
 /**
@@ -45,8 +45,12 @@ public class WebServiceBean extends BaseJpaBean {
 		return InfoUtils.convert(supplyBean.findAllCategories());
 	}
 	
-	public List<SupplyItem> findAllItems() {
-		return supplyBean.findAllItems();
+	public List<SupplyItemInfo> findAllItems() {
+		return InfoUtils.convert(supplyBean.findAllItems());
+	}
+	
+	public List<SupplyItemInfo> findItemsByCategory(String categoryName) {
+		return InfoUtils.convert(supplyBean.findItemsByCategory(categoryName));
 	}
 	
 }

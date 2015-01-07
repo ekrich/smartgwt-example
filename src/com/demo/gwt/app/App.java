@@ -52,15 +52,16 @@ public class App extends HLayout implements EntryPoint {
         setLayoutMargin(20);  
   
         //DataSource supplyCategoryDS = SupplyCategoryXmlDs.getInstance();
-        DataSource supplyCategoryDS = SupplyCategoryDs.getInstance();  
-        DataSource supplyItemDS = ItemSupplyXmlDs.getInstance();  
+        final DataSource supplyCategoryDS = SupplyCategoryDs.getInstance();  
+        final DataSource supplyItemDS = SupplyItemDs.getInstance();  
   
         categoryTree = new CategoryTreeGrid(supplyCategoryDS);  
         categoryTree.setAutoFetchData(true);  
         categoryTree.addNodeClickHandler(new NodeClickHandler() {  
             public void onNodeClick(NodeClickEvent event) {  
                 String category = event.getNode().getAttribute("categoryName");  
-                findItems(category);  
+                //findItems(category);
+                fetchItems(category, supplyItemDS);
             }  
         });  
   
@@ -204,6 +205,29 @@ public class App extends HLayout implements EntryPoint {
         }  
   
         itemList.filterData(findValues);  
+        itemDetailTabPane.clearDetails(categoryTree.getSelectedRecord());  
+    }
+    
+    public void fetchItems(String categoryName, DataSource supplyItemDs) {  
+    	  
+        Criteria findValues;  
+  
+        String formValue = searchForm.getValueAsString("findInCategory");  
+        ListGridRecord selectedCategory = categoryTree.getSelectedRecord();  
+        if (formValue != null && selectedCategory != null) {  
+            categoryName = selectedCategory.getAttribute("categoryName");  
+            findValues = searchForm.getValuesAsCriteria();  
+            findValues.addCriteria("category", categoryName);  
+  
+        } else if (categoryName == null) {  
+            findValues = searchForm.getValuesAsCriteria();  
+        } else {  
+            findValues = new Criteria();  
+            findValues.addCriteria("category", categoryName);  
+        }  
+  
+        
+        supplyItemDs.filterData(findValues);  
         itemDetailTabPane.clearDetails(categoryTree.getSelectedRecord());  
     }
 }  

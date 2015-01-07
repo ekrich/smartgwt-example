@@ -17,6 +17,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.demo.rs.SupplyItemInfo;
+import com.demo.rs.WebServiceInfo;
 import com.demo.util.StringUtils;
 
 
@@ -24,11 +26,14 @@ import com.demo.util.StringUtils;
 @XmlAccessorType (XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name="SupplyItem.findAll", 
-			query="select s from SupplyItem s")
+		query="select s from SupplyItem s"),
+	@NamedQuery(name="SupplyItem.findByCategory",
+		query="select s from SupplyItem s"
+			+ " where s.supplyCategory.categoryName = :categoryName")
 })
 @Entity
 @Table(name="SUPPLY_ITEM")
-public class SupplyItem {
+public class SupplyItem implements WebServiceInfo<SupplyItemInfo>{
 	
 	@XmlElement(name = "SKU")
 	@Id
@@ -61,10 +66,15 @@ public class SupplyItem {
     
 	
 	public SupplyItem() {}
-
+	
 	@Override
 	public String toString() {
 		return StringUtils.createToString(this, sku, itemName, description, units, unitCost, category);
+	}
+	
+	@Override
+	public SupplyItemInfo getWebServiceInfo() {
+		return new SupplyItemInfo(sku, itemName, description, units, unitCost, supplyCategory.getCategoryName());
 	}
 
 	public String getDescription() {

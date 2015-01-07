@@ -9,7 +9,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 import com.demo.model.LogInterceptor;
@@ -23,16 +22,16 @@ public class CategoryService {
   
   private static final String VERSION = "v1";
   
-  private static JAXBContext jaxbContext;
+  //private static JAXBContext jaxbContext;
   
   @Inject
   private WebServiceBean webServiceBean;
   
   public CategoryService() throws JAXBException {
     LOG.info(String.format("Restful %s (%s) created.", this.getClass().getSimpleName(), VERSION));
-    if (jaxbContext != null) {
-    	jaxbContext = JAXBContext.newInstance(CategoryInfo.class);
-    }
+//    if (jaxbContext != null) {
+//    	jaxbContext = JAXBContext.newInstance(CategoryInfo.class);
+//    }
   }
   
   @GET
@@ -48,7 +47,6 @@ public class CategoryService {
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   @Interceptors({LogInterceptor.class})
   public DsResponse<CategoryInfo> getResponseAllCategories() {
-	  //JSONConfiguration.mapped().rootUnwrapping(true).build()
 	  List<CategoryInfo> data = webServiceBean.findAllCategories();
 	  int endAndTotalRows = data.size();
 	  return new DsResponse<>(0, 0, endAndTotalRows, endAndTotalRows, data);

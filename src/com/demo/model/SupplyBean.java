@@ -39,16 +39,30 @@ public class SupplyBean extends BaseJpaBean {
 		DataLoader dataLoader = new DataLoader(em);
 		SupplyCategories supplyCategories = dataLoader.read("com/demo/data/supplyCategory.data.xml", SupplyCategories.class);
 		List<SupplyCategory> supplyCategoryList = supplyCategories.getSupplyCategories();
-//		for(SupplyCategory category :  supplyCategoryList) {
-//			SupplyCategory parent = new SupplyCategory();
-//			parent.setCategoryName(category.getParentId());
-//			category.setParent(parent);
-//		}
-		//dataLoader.print(supplyCategoryList);
+		SupplyCategory previousCategory = null;
+		for(SupplyCategory category :  supplyCategoryList) {
+			String parentId = category.getParentId();
+			if("root".equals(parentId)) {
+				category.setParent(null);
+			}
+			
+			if (previousCategory != null) {
+				if (previousCategory.getCategoryName().equals(parentId)) {
+					category.setParent(previousCategory);
+				}
+			}
+			
+			previousCategory = category;
+		}
+		dataLoader.print(supplyCategoryList);
 		dataLoader.persist(supplyCategoryList);
 		// looks like will have to find each parent via parentId and set root will be null or "root"
 		SupplyItems supplyItems = dataLoader.read("com/demo/data/supplyItem.data.xml", SupplyItems.class);
 		List<SupplyItem> supplyItemList = supplyItems.getSupplyItems();
+		for (SupplyItem supplyItem : supplyItemList) {
+			String categoryName = supplyItem.getCategory();
+			supplyItem.setSupplyCategory(findSupplyCategory(categoryName));
+		}
 		//dataLoader.print(supplyItemList);
 		dataLoader.persist(supplyItemList);
 	}
@@ -57,8 +71,20 @@ public class SupplyBean extends BaseJpaBean {
 		return em.createNamedQuery("SupplyCategory.findAll", SupplyCategory.class).getResultList();
 	}
 	
+	public SupplyCategory findSupplyCategory(String categoryName) {
+		return em.createNamedQuery("SupplyCategory.find", SupplyCategory.class)
+				.setParameter("categoryName", categoryName)
+				.getSingleResult();
+	}
+	
 	public List<SupplyItem> findAllItems() {
 		return em.createNamedQuery("SupplyItem.findAll", SupplyItem.class).getResultList();
+	}
+	
+	public List<SupplyItem> findItemsByCategory(String categoryName) {
+		return em.createNamedQuery("SupplyItem.findByCategory", SupplyItem.class)
+				.setParameter("categoryName", categoryName)
+				.getResultList();
 	}
 	
 }
