@@ -107,7 +107,7 @@ public class ItemDetailTabPane extends TabSet {
         viewTab.setPane(itemViewer);  
   
         Tab editTab = new Tab("Edit");  
-        editTab.setIcon("demoApp/icon_edit.png");  
+        editTab.setIcon("silk/application_form_edit.png");  
         editTab.setWidth(70);  
         editTab.setPane(editorForm);  
   

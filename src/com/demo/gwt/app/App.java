@@ -166,7 +166,7 @@ public class App extends HLayout implements EntryPoint {
             }  
         });  
   
-        final MenuItem editMenuItem = new MenuItem("Edit Item", "demoApp/icon_edit.png");  
+        final MenuItem editMenuItem = new MenuItem("Edit Item", "silk/application_form_edit.png");  
         editMenuItem.addClickHandler(new com.smartgwt.client.widgets.menu.events.ClickHandler() {  
             public void onClick(MenuItemClickEvent event) {  
                 itemDetailTabPane.selectTab(1);  
