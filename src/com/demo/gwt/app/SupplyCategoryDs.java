@@ -23,7 +23,7 @@ public class SupplyCategoryDs extends RestDataSource {
         DataSourceTextField itemNameField = new DataSourceTextField("categoryName", "Item", 128, true);  
         itemNameField.setPrimaryKey(true);  
   
-        DataSourceTextField parentField = new DataSourceTextField("parentID", null);  
+        DataSourceTextField parentField = new DataSourceTextField("parentId", null);  
         parentField.setHidden(true);  
         parentField.setRequired(true);  
         //parentField.setRootValue("root");  // default is null, set to null in objects
