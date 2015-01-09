@@ -28,8 +28,7 @@ import com.demo.util.StringUtils;
 @XmlAccessorType (XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name="SupplyCategory.findAll", 
-			query="select s from SupplyCategory s"
-					+ " where s.parent is null"),
+			query="select s from SupplyCategory s"),
 	@NamedQuery(name="SupplyCategory.find", 
 	query="select s from SupplyCategory s"
 			+ " where s.categoryName = :categoryName")
@@ -101,7 +100,7 @@ public class SupplyCategory implements WebServiceInfo<CategoryInfo>{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return StringUtils.createToString(this, parentId, categoryName);
+		return StringUtils.createToString(this, parent, categoryName);
 	}	
 	
 }

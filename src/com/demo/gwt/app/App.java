@@ -49,9 +49,8 @@ public class App extends HLayout implements EntryPoint {
 	public void onModuleLoad() {
         setWidth100();  
         setHeight100();  
-        setLayoutMargin(20);  
+        setLayoutMargin(10);  
   
-        //DataSource supplyCategoryDS = SupplyCategoryXmlDs.getInstance();
         final DataSource supplyCategoryDS = SupplyCategoryDs.getInstance();  
         final DataSource supplyItemDS = SupplyItemDs.getInstance();  
   

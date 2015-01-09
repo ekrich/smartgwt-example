@@ -54,8 +54,8 @@ public class SupplyBean extends BaseJpaBean {
 			
 			previousCategory = category;
 		}
-		dataLoader.print(supplyCategoryList);
 		dataLoader.persist(supplyCategoryList);
+		dataLoader.print(supplyCategoryList);
 		// looks like will have to find each parent via parentId and set root will be null or "root"
 		SupplyItems supplyItems = dataLoader.read("com/demo/data/supplyItem.data.xml", SupplyItems.class);
 		List<SupplyItem> supplyItemList = supplyItems.getSupplyItems();
