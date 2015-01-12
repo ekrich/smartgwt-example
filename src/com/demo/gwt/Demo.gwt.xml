@@ -9,8 +9,8 @@
 	<inherits name="com.smartgwt.SmartGwtNoScript"/>	
     <inherits name="com.smartclient.theme.enterprise.EnterpriseResources"/>
     
-    <!-- Need this for development ONLY. Enables Visual and DataSource builders -->
-    <inherits name="com.smartgwtee.tools.Tools"/>
+    <!-- For SmartClient console -->
+    <inherits name="com.smartgwt.tools.SmartGwtTools"/>
     
     <!-- Source paths relative to module file (Demo.gwt.xml) -->
 	<source path="app" />

@@ -41,8 +41,9 @@ public class ItemService {
   @Path("/smartgwt")
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   @Interceptors({LogInterceptor.class})
-  public DsResponse<SupplyItemInfo> getResponseItemsByCategory(@QueryParam(value = "categoryName") String categoryName) {
-	  List<SupplyItemInfo> data = webServiceBean.findItemsByCategory(categoryName);
+  public DsResponse<SupplyItemInfo> getResponseItemsByCategory(@QueryParam(value = "category") String categoryName) {
+	  List<SupplyItemInfo> data = webServiceBean.findAllItems();
+	  //List<SupplyItemInfo> data = webServiceBean.findItemsByCategory(categoryName);
 	  int endAndTotalRows = data.size();
 	  return new DsResponse<>(0, 0, endAndTotalRows, endAndTotalRows, data);
   }
