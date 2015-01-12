@@ -1,7 +1,7 @@
 package com.demo.entity;
 
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,21 +49,34 @@ public class SupplyCategory implements WebServiceInfo<CategoryInfo>{
 	SupplyCategory parent; 
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "parent")
-    private Set<SupplyCategory> supplyCategories = new TreeSet<>();
+    private Set<SupplyCategory> supplyCategories = new HashSet<>();
 
 	
 	public SupplyCategory() {
 	}
 	
-
+	public void addSupplyCategory(SupplyCategory supplyCategoryChild) {
+		supplyCategories.add(supplyCategoryChild);
+	}
+	
+	public void setParentAndChild(SupplyCategory parent) {
+		setParent(parent);
+		if (parent != null) {
+			parent.addSupplyCategory(this);
+		}
+	}
+	
 	@Override
 	public CategoryInfo getWebServiceInfo() {
 		// avoid NPE until I can fix load
 		String parentCategoryName = (parent == null ? null : parent.categoryName);
 		return new CategoryInfo(categoryName, parentCategoryName);
 	}
-
-
+	
+	@Override
+	public String toString() {
+		return StringUtils.createToString(this, parent, categoryName);
+	}	
 
 	public String getCategoryName() {
 		return categoryName;
@@ -96,11 +109,5 @@ public class SupplyCategory implements WebServiceInfo<CategoryInfo>{
 	public void setSupplyCategories(Set<SupplyCategory> supplyCategories) {
 		this.supplyCategories = supplyCategories;
 	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return StringUtils.createToString(this, parent, categoryName);
-	}	
 	
 }

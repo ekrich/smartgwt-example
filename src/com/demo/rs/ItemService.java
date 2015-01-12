@@ -7,8 +7,8 @@ import javax.inject.Inject;
 import javax.interceptor.Interceptors;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.demo.model.LogInterceptor;
@@ -38,21 +38,11 @@ public class ItemService {
   }
   
   @GET
-  @Path("/smartgwt/{categoryName}")
-  @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-  @Interceptors({LogInterceptor.class})
-  public DsResponse<SupplyItemInfo> getResponseItemsByCategory(@PathParam("categoryName") String categoryName) {
-	  List<SupplyItemInfo> data = webServiceBean.findItemsByCategory(categoryName);
-	  int endAndTotalRows = data.size();
-	  return new DsResponse<>(0, 0, endAndTotalRows, endAndTotalRows, data);
-  }
-  
-  @GET
   @Path("/smartgwt")
   @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
   @Interceptors({LogInterceptor.class})
-  public DsResponse<SupplyItemInfo> getResponseItems() {
-	  List<SupplyItemInfo> data = webServiceBean.findAllItems();
+  public DsResponse<SupplyItemInfo> getResponseItemsByCategory(@QueryParam(value = "categoryName") String categoryName) {
+	  List<SupplyItemInfo> data = webServiceBean.findItemsByCategory(categoryName);
 	  int endAndTotalRows = data.size();
 	  return new DsResponse<>(0, 0, endAndTotalRows, endAndTotalRows, data);
   }

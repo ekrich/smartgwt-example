@@ -7,7 +7,7 @@
         <description>Set the SMTP mailhost</description>
         <env-entry-name>smtpHost</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>mailhost.ray.com</env-entry-value>
+        <env-entry-value>mailhost.example.com</env-entry-value>
       </env-entry>
     </session>
   </enterprise-beans>

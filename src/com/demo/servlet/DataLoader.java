@@ -45,12 +45,16 @@ public class DataLoader {
 	public <U> void persist(List<U> list) {
 		LOG.info("Persisting: " +  list.get(0).getClass().getSimpleName());
 		for (U u : list) {
+			persist(u);
+		}
+	}
+	
+	public <U> void persist(U u) {
 			try {
 				em.persist(u);
 			} catch (Exception e) {
 				LOG.info("Exception: " +  e.getMessage());
 			}
-		}
 	}
 	
 	private InputStream getInputStream(String fileName) {

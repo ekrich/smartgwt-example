@@ -37,26 +37,22 @@ public class SupplyBean extends BaseJpaBean {
 	@Interceptors(TransactionExceptionInterceptor.class)
 	public void loadSupplyCategories() {
 		DataLoader dataLoader = new DataLoader(em);
+		// SupplyCategory load
 		SupplyCategories supplyCategories = dataLoader.read("com/demo/data/supplyCategory.data.xml", SupplyCategories.class);
 		List<SupplyCategory> supplyCategoryList = supplyCategories.getSupplyCategories();
-		SupplyCategory previousCategory = null;
 		for(SupplyCategory category :  supplyCategoryList) {
 			String parentId = category.getParentId();
+			// "root" will have a null parent object for JPA
 			if("root".equals(parentId)) {
 				category.setParent(null);
+			} else {
+				category.setParentAndChild(findSupplyCategory(parentId));
 			}
-			
-			if (previousCategory != null) {
-				if (previousCategory.getCategoryName().equals(parentId)) {
-					category.setParent(previousCategory);
-				}
-			}
-			
-			previousCategory = category;
+			dataLoader.persist(category);
 		}
-		dataLoader.persist(supplyCategoryList);
 		dataLoader.print(supplyCategoryList);
-		// looks like will have to find each parent via parentId and set root will be null or "root"
+		
+		// SupplyItem load
 		SupplyItems supplyItems = dataLoader.read("com/demo/data/supplyItem.data.xml", SupplyItems.class);
 		List<SupplyItem> supplyItemList = supplyItems.getSupplyItems();
 		for (SupplyItem supplyItem : supplyItemList) {

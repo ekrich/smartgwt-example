@@ -6,7 +6,7 @@
 	<inherits name="com.google.gwt.user.History"/>
 	
 	<!-- SmartGWT specific modules that are located in smartgwt.jar or smartgwt-skins.jar -->
-	<inherits name="com.smartgwtee.SmartGwtEENoScript"/>	
+	<inherits name="com.smartgwt.SmartGwtNoScript"/>	
     <inherits name="com.smartclient.theme.enterprise.EnterpriseResources"/>
     
     <!-- Need this for development ONLY. Enables Visual and DataSource builders -->
@@ -18,6 +18,4 @@
 	<!-- The app starts here -->
 	<entry-point class="com.demo.gwt.app.App"></entry-point>
 	
-	<!-- Super Dev Mode support -->
-	<add-linker name="xsiframe" />
 </module>
