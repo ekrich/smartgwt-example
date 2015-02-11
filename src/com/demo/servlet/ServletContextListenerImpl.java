@@ -1,5 +1,6 @@
 package com.demo.servlet;
 
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import javax.annotation.Resource;
@@ -80,6 +81,12 @@ public class ServletContextListenerImpl implements ServletContextListener {
 		// load the application data
 		supplyBean.loadSupplyCategories();
 		
+		// start an H2 Console - need access to module
+		try {
+			org.h2.tools.Server.createWebServer((String[])null).start();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		// demo only ----------------------------------------------------------------
 		LOG.info(APP_NAME + " web context initialized.");

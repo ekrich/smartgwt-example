@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
+Dependencies: com.h2database.h2 
 Class-Path: 
 
