@@ -1,4 +1,28 @@
 This project is not complete enough at the time to use - just wanted a good distributed backup.
+Installing Wildfly - TODO
+
+Before deploying this application you must compile the GWT code. If the menu item 
+Project-> Build Automatically is selected the java code will build inside Eclipse sufficiently
+to deploy the application. The main GWT site for more information is here. http://www.gwtproject.org/
+
+To install GWT "Google Plugin for Eclipse", use the following instructions for Eclipse 4.4 (Luna):
+1) Select Help > Install New Software... In the dialog that appears, 
+   enter the update site URL into the Work with text box: https://dl.google.com/eclipse/plugin/4.4
+2) Select Google Plugin for Eclipse 4.4 - Note: we need to install the latest SDK manually.
+3) Download the SDK from here, currently 2.7.0. http://www.gwtproject.org/download.html
+4) The GWT SDK can be unzipped anywhere but I prefer my $HOME/eclipse-plugins
+5)  In Eclipse, got to Window -> Preferences -> Google -> Web Toolkit and push Add...
+    Navigate to the Installation directory and select gwt-2.7.0.
+6) Look at Markers Tab in Eclipse and fix any class path issues you may have.
+7) Now right click on demo and select Google -> GWT Compile (or use the toolbar icon menu)
+8) The following options may help under Advanced
+   Additional compiler arguments: -localWorkers 2 -strict -war WebContent
+   VM arguments: -Xmx1025m
+9) To deploy right click on the Wildfly server and select Add and Remove ...
+   Add "demo" and cleick finish.
+
+To view the application use the following URL:
+http://localhost:8080/demo/
 
 To use the H2 Console started when the application started navigate to the following URL:
 http://localhost:8082/
