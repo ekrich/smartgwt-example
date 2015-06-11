@@ -217,15 +217,13 @@ public class App extends HLayout implements EntryPoint {
             categoryName = selectedCategory.getAttribute("categoryName");  
             findValues = searchForm.getValuesAsCriteria();  
             findValues.addCriteria("category", categoryName);  
-  
         } else if (categoryName == null) {  
             findValues = searchForm.getValuesAsCriteria();  
         } else {  
             findValues = new Criteria();  
             findValues.addCriteria("category", categoryName);  
         }  
-  
-        
+         
         supplyItemDs.filterData(findValues);  
         itemDetailTabPane.clearDetails(categoryTree.getSelectedRecord());  
     }
