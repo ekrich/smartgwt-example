@@ -2,6 +2,10 @@ Directions to use JPA2/JUnit4 testing with WebLogic 11g/12c and JBoss 7
 
 Setup Run Configuration for your JUnit Test
 
+H2 Database
+We run the H2 database and expose the Web interface so we need the jar on the SBT build path. The
+jar is available in the Wildfly run time.
+
 Prerequisite: add Junit 4 library to build path
 
 Default is JPA setup is hibernate.

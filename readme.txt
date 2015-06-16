@@ -1,6 +1,10 @@
 This project is not complete enough at the time to use - just wanted a good distributed backup.
 Installing Wildfly - TODO
 
+Installing Egit to download code into Eclipse.
+Help->Install New Software...
+http://download.eclipse.org/egit/updates
+
 Before deploying this application you must compile the GWT code. If the menu item 
 Project-> Build Automatically is selected the java code will build inside Eclipse sufficiently
 to deploy the application. The main GWT site for more information is here. http://www.gwtproject.org/
