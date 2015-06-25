@@ -22,6 +22,12 @@ val junit = "junit" % "junit" % "4.11" % "test"
 val junitSbtInterface = "com.novocode" % "junit-interface" % "0.11" % "test"
 val gwt = "com.google.gwt" % "gwt-user" % "2.7.0"
 val j2ee7 = "javax" % "javaee-api" % "7.0"
+val smartgwtnightly = "2015-06-07/"
+val smartgwtbaseurl = "http://www.smartclient.com/builds/SmartGWT/5.0p/LGPL/" + smartgwtnightly
+val smartgwt = "com.smartgwt" % "smartgwt" % "5.0p"
+val smartgwtskins = "com.smartgwt" % "smartgwt-skins" % "5.0p"
+val smartgwtloc = smartgwtbaseurl + "smartgwt.jar"
+val smartgwtskinsloc = smartgwtbaseurl + "smartgwt-skins.jar"
 
 
 // managed jars
@@ -29,7 +35,9 @@ libraryDependencies ++= Seq(
     j2ee7,
     junit,
     junitSbtInterface,
-    gwt
+    gwt,
+    smartgwt from smartgwtloc,
+    smartgwtskins from smartgwtskinsloc
 )
 
 javaSource in Compile := base.value / "src"
@@ -53,14 +61,32 @@ javaOptions in Test += "-Djunit.output.file=" + (target.value / "generated/junit
 fork in Test := true
 
 // package setup for war
-jetty()
+//jetty()
 
 // set <project>/WebContent as the webapp resources directory
-webappSrc in webapp <<= baseDirectory map  { _ / "WebContent" }
+//webappSrc in webapp <<= baseDirectory map  { _ / "WebContent" }
 
 // put stuff in classes dir
-webInfClasses in webapp := true
+//webInfClasses in webapp := true
 
 // disable project jar
-publishArtifact in (Compile, packageBin) := false
+//publishArtifact in (Compile, packageBin) := false
+
+// alternative
+//val packageWar = taskKey[File]("package-war")
+
+packageWar := {
+    IO.copyDirectory(file(base + "/WebContent"), file(base + "/target/webapp")) 
+    val warFile = name.value + "-" + version.value + ".war"
+    (baseDirectory in Compile).value / "target" / warFile
+}
+
+// create an Artifact for publishing the .war file
+artifact in (Compile, packageWar) := {
+    val previous: Artifact = (artifact in (Compile, packageWar)).value
+    previous.copy(`type` = "war", extension = "war", classifier = Some("webapp"))
+}
+
+// add the .war file to what gets published
+addArtifact(artifact in (Compile, packageWar), packageWar)
 
