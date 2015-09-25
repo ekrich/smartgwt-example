@@ -1,5 +1,5 @@
 <projectDescription>
-  <name>SmartGWT Example</name>
+  <name>demo</name>
   <buildSpec>
     <buildCommand>
       <name>org.scala-ide.sdt.core.scalabuilder</name>
